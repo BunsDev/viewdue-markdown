@@ -1,0 +1,46 @@
+{
+  "name": "viewdue-markdown",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "author": "Val Alexander",
+  "license": "MIT",
+  "homepage": "https://github.com/val-alexander/viewdue-markdown",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/val-alexander/viewdue-markdown.git"
+  },
+  "bugs": {
+    "url": "https://github.com/val-alexander/viewdue-markdown/issues"
+  },
+  "keywords": [
+    "markdown",
+    "editor",
+    "wysiwyg"
+  ],
+  "scripts": {
+    "dev": "bun run --watch index.ts",
+    "build": "bun build index.ts",
+    "start": "bun run index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/react": "^19.2.7"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "clsx": "^2.1.1",
+    "html2pdf.js": "^0.12.1",
+    "lucide-react": "^0.561.0",
+    "next": "^16.0.10",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "sonner": "^2.0.7",
+    "tailwind-merge": "^3.4.0"
+  }
+}
