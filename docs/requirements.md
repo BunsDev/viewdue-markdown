@@ -56,18 +56,14 @@ This repo already contains most of the editor surface area in `components/editor
 
 These are not product requirements; they’re **engineering prerequisites** to make the editor build/run in this repo cleanly:
 
-- **Missing runtime deps** referenced in code:
-  - `next/dynamic` is used in `components/editor/blocks/code-block.tsx` but `next` is not in `package.json`
-  - `mermaid` is dynamically imported by `mermaid-block.tsx` but not listed in `package.json`
-  - `sonner` is imported in `rich-editor.tsx` but not listed in `package.json`
-  - Several imports reference paths like `@/components/notes/*` and `@/components/modals/*` that are not present in this repo snapshot
+- **Dependency alignment**:
+  - This repo depends on Mermaid and Radix UI primitives used by `components/ui/*` and the Mermaid renderers. Keep `package.json` aligned with imports as the component set evolves.
 - **Duplicate/overlapping utilities**: `generateId()` exists in both `lib/utils.ts` and `lib/types/notes.ts`
-- **Inconsistent type import paths**: some files use `@/types/notes`, others use `@/lib/types/notes`
 
 Decision point:
 
-- If this repo is meant to be a **component library**, we should remove `next/*` and depend only on React + Bun-compatible tooling.
-- If this repo is meant to be a **Next app**, we should add Next and include missing app modules/endpoints.
+- If this repo is meant to be a **component library**, remove `next/*` usage and avoid Next-only assumptions.
+- If this repo is meant to be a **Next app**, add `next` and include any required app routes for link previews / AI actions.
 
 ---
 
@@ -352,9 +348,8 @@ Replace hard-coded `switch(block.type)` with a registry:
 
 - Decide target: **library** vs **app**
 - Align dependencies:
-  - add missing runtime deps (`mermaid`, `sonner`, and/or remove `next/dynamic`)
-  - remove/replace missing imports (`PdfPreviewModal`) or add them
-- Consolidate imports (`@/types/notes` vs `@/lib/types/notes`) and dedupe `generateId()`
+  - add missing runtime deps (`mermaid`, Radix UI packages, etc.)
+- Dedupe shared helpers where needed (e.g. `generateId()` exists in both `lib/utils.ts` and `lib/types/notes.ts`)
 
 ### Phase 1 — MVP editor package (3–5 days)
 
